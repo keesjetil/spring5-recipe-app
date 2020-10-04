@@ -37,4 +37,15 @@ public class RecipeServiceImplTest {
         assertEquals(1,recipes.size());
         verify(recipeRepository, times(1)).findAll();
     }
+
+    @Test
+    public void getRecipeById() {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.findById(any())).thenReturn(java.util.Optional.of(recipe));
+        Recipe recipeReturned = recipeService.findById(1L);
+        assertNotNull(recipeReturned);
+        verify(recipeRepository, times(1)).findById(any());
+    }
 }
